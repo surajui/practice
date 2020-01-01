@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xl-6">
+      <table class="table table-border">
+        <tr>
+          <th>Firstname</th>
+          <th>Lirstname</th>
+          <th>City</th>
+          <th>Pincode</th>
+          <th>Inter</th>
+          <th>Btech</th>
+          <th>SSC</th>
+          <th>Action</th>
+        </tr>
+        <tr *ngFor="let a of result">
+          <td>{{a.fname}}</td>
+          <td>{{a.lname}}</td>
+          <td>{{a.address[0].city}}</td>
+          <td>{{a.address[0].pincode}}</td>
+          <td>{{a.education[0].inter}}</td>
+          <td>{{a.education[0].btech}}</td>
+          <td>{{a.education[0].ssc}}</td>
+          <td><button class="btn btn-primary" (click)="edit(a)" data-toggle="modal" data-target="#myModal">Edit</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="container">
+
+
+
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+
+          <div class="modal-header">
+            <h4 class="modal-title">Modal Heading</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+
+          <div class="modal-body">
+            <form [formGroup]="reactive">
+              <div class="form-group">
+                <label>Id</label>
+                <input type="text" class="form-control" formControlName="id">
+              </div>
+              <div class="form-group">
+                <label>Firstname</label>
+                <input type="text" class="form-control" formControlName="fname"
+                  [ngClass]="{'is-invalid':reactive.get('fname').invalid && reactive.get('fname').touched}">
+                <div *ngIf="reactive.get('fname').invalid && reactive.get('fname').touched" class="invalid-feedback">
+                  Please enter name</div>
+
+              </div>
+              <div class="form-group">
+                <label>Lastname</label>
+                <input type="text" class="form-control" formControlName="lname"
+                  [ngClass]="{'is-invalid':reactive.get('lname').invalid && reactive.get('lname').touched}">
+                <div *ngIf="reactive.get('lname').invalid && reactive.get('lname').touched" class="invalid-feedback">
+                  Please enter lastname</div>
+              </div>
+
+              <!-- address start -->
+
+              <div formArrayName="address">
+                <div class="address" *ngFor="let add of reactive.get('address').controls; let i=index"
+                  [formGroupName]="i">
+                  <label>City</label>
+                  <input type="text" formControlName="city" class="form-control"
+                    [ngClass]="{'is-invalid': address.controls[i].get('city').invalid && address.controls[i].get('city').touched}">
+                  <div *ngIf="address.controls[i].get('city').invalid && address.controls[i].get('city').touched"
+                    class="invalid-feedback">
+                    please enter city
+                  </div>
+                  <label>Pincode</label>
+                  <input type="text" formControlName="pincode" class="form-control"
+                    [ngClass]="{'is-invalid':address.controls[i].get('pincode').invalid && address.controls[i].get('pincode').touched}">
+                  <div *ngIf="address.controls[i].get('pincode').invalid && address.controls[i].get('pincode').touched"
+                    class="invalid-feedback">Please Enter Pincode</div>
+                </div>
+              </div>
+
+              <!-- address end -->
+
+              <!-- education start -->
+              <div formArrayName="education">
+                <div class="education" *ngFor="let edu of reactive.get('education').controls; let a=index"
+                  [formGroupName]="a">
+                  <label>Inter</label>
+                  <input type="text" formControlName="inter" class="form-control"
+                    [ngClass]="{'is-invalid': education.controls[a].get('inter').invalid && education.controls[a].get('inter').touched}">
+                  <div *ngIf="education.controls[a].get('inter').invalid && education.controls[a].get('inter').touched"
+                    class="invalid-feedback">must field</div>
+                  <label>Btech</label>
+                  <input type="text" formControlName="btech" class="form-control"
+                    [ngClass]="{'is-invalid': education.controls[a].get('btech').invalid && education.controls[a].get('btech').touched}">
+                  <div *ngIf="education.controls[a].get('btech').invalid && education.controls[a].get('btech').touched"
+                    class="invalid-feedback">enter name</div>
+                  <label>SSC</label>
+                  <input type="text" formControlName="ssc" class="form-control"
+                    [ngClass]="{'is-invalid':education.controls[a].get('ssc').invalid && education.controls[a].get('ssc').touched}">
+                  <div *ngIf="education.controls[a].get('ssc').invalid && education.controls[a].get('ssc').touched"
+                    class="invalid-feedback">enter School Name</div>
+                </div>
+              </div>
+              <!-- education end -->
+
+              <div>
+                <input type="button" class="btn btn-primary" value="Submit" (click)="update()">
+              </div>
+
+            </form>
+          </div>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>

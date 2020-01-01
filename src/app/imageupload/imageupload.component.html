@@ -1,0 +1,33 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <form [formGroup]="imageupload">
+         <div class="form-group">
+           <img [src]="url" height="200px" width="250p">
+         </div>
+         <div class="form-group">
+          <input type="file" formControlName="img" (change)="onSelectFile($event)" accept="image/*">
+         </div>
+         <div class="form-group">
+          <button class="btn btn-success" (click)="onUpload()">Upload!</button>
+         </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="conatiner">
+  <div class="row">
+    <div class="col-6">
+      <table class="table table-bordered">
+        <tr>
+          <th>Image</th>
+        </tr>
+        <tr *ngFor="let i of result">
+          <td><img src="{{i.picture}}">s</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+

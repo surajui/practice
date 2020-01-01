@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <form [formGroup]="reactive" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="enable">Firstname</label>
+          <input type="text" formControlName="firstName" class="form-control"
+            [ngClass]="{'is-invalid':reactive.get('firstName').invalid && reactive.get('firstName').touched }">
+          <p *ngIf="reactive.get('firstName').invalid && reactive.get('firstName').touched" class="invalid-feedback">
+            Please enter firstname</p>
+        </div>
+        <div class="form-group">
+          <label>Lastname</label>
+          <input type="text" formControlName="lastName" class="form-control"
+            [ngClass]="{'is-invalid':reactive.get('lastName').invalid && reactive.get('lastName').touched }">
+          <p *ngIf="reactive.get('lastName').invalid && reactive.get('lastName').touched" class="invalid-feedback">
+            Please enter lastname</p>
+        </div>
+        <div class="form-group">
+          <label>EMAIL</label>
+          <input type="text" formControlName="emailAddress" class="form-control"
+            [ngClass]="{'is-invalid':reactive.get('emailAddress').invalid && reactive.get('emailAddress').touched }">
+          <p *ngIf="reactive.get('emailAddress').invalid && reactive.get('emailAddress').touched"
+            class="invalid-feedback">Please enter emailAddress</p>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<table class="table table-border">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Email</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let s of result">
+    <td><input *ngIf="!enableEdit" [(ngModel)]="s.firstName" [disabled]="!s.isEditable"></td>
+    <td><input *ngIf="!enableEdit" [(ngModel)]="s.lastName" [disabled]="!s.isEditable"></td>
+    <td><input *ngIf="!enableEdit" [(ngModel)]="s.emailAddress" [disabled]="!s.isEditable"></td>
+    <td><button class="btn btn-primary mr-4" (click)="s.isEditable=!s.isEditable" *ngIf="!s.isEditable">Update</button>
+      <button class="btn btn-success mr-4" *ngIf="s.isEditable" (click)="s.isEditable=!s.isEditable"
+        (click)="update(s)">Save</button>
+      <button class="btn btn-danger" (click)="delete(s)">Delete</button></td>
+  </tr>
+</table>

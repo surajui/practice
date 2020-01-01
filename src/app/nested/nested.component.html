@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <table class="table table-border">
+      <tr>
+      
+      <!-- <th>Scope</th> -->
+            <th>one</th>
+            <th>two</th>
+            <th>three</th>
+             <th>scope</th>
+            <th>client_id</th>     
+            <th>resource_id</th>           
+            <th>authorized_grant_types</th> 
+            <th>redirect_uri</th> 
+      
+    </tr>
+    <tr *ngFor="let s of result">
+      <td>{{s.name[0].one}}</td>
+      <td>{{s.name[0].two}}</td>
+      <td>{{s.name[0].three}}</td>
+      <td>{{s.resources[0].scope}}</td>
+      <td>{{s.resources[0].client_id}}</td>
+      <td>{{s.resources[0].resource_ids}}</td>
+      
+      <td>{{s.resources[0].authorized_grant_types[0]}}</td>
+      <td>{{s.resources[0].redirect_uri[0]}}</td>
+    </tr>
+    </table>
+  </div>
+</div>
