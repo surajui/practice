@@ -21,7 +21,7 @@
     "@angular/router": "~8.0.0",
     "@syncfusion/ej2-angular-dropdowns": "^17.3.28",
     "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng-multiselect-dropdown": "^0.2.6",
     "ng-recaptcha": "^5.0.0",
     "ng5-slider": "^1.2.4",
